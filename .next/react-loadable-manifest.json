@@ -1,0 +1,14 @@
+{
+  "app\\page.jsx -> @/components/three/HeroScene": {
+    "id": "app\\page.jsx -> @/components/three/HeroScene",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_three_HeroScene_jsx.js"
+    ]
+  },
+  "app\\page.jsx -> @/components/three/SkillsScene": {
+    "id": "app\\page.jsx -> @/components/three/SkillsScene",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_three_SkillsScene_jsx.js"
+    ]
+  }
+}

@@ -1,0 +1,225 @@
+.calcPage {
+  padding: 4rem 0 6rem;
+  background: var(--cream);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+
+.tab {
+  padding: 0.85rem 1.75rem;
+  background: none;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  transition: all 0.2s;
+  margin-bottom: -1px;
+}
+.tab:hover { color: var(--navy); }
+.tabActive { color: var(--copper) !important; border-bottom-color: var(--copper) !important; }
+
+.calcCard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.calcCardHead {
+  padding: 2rem 2.5rem 1.5rem;
+  background: linear-gradient(135deg, var(--sand), var(--stone));
+  border-bottom: 1px solid var(--border);
+}
+
+.calcCardTitle { font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
+.calcCardSub { font-size: 0.82rem; color: var(--text-dim); }
+
+.formSection {
+  padding: 1.75rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.formSectionTitle {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--copper);
+  margin-bottom: 1.25rem;
+}
+
+.inputGrid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.inputGrid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+.inputGrid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+
+.radioGroup { display: flex; gap: 2rem; flex-wrap: wrap; }
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  cursor: pointer;
+}
+.radioLabel input { cursor: pointer; accent-color: var(--copper); }
+
+.calcActions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.75rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.results { overflow: hidden; }
+
+.totalCard {
+  background: linear-gradient(135deg, var(--navy), #2A3D6A);
+  padding: 2.5rem;
+}
+
+.totalInner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+}
+
+.totalLabel { display: block; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.5rem; }
+.totalVal { display: block; font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; color: var(--copper); margin-bottom: 0.3rem; }
+.totalNote { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+
+.totalBreakdown { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.totalBreakItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.5rem 0.85rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+}
+
+.tbLabel { font-size: 0.72rem; color: rgba(255,255,255,0.55); font-weight: 500; }
+.tbVal { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.85); }
+
+.boqSection { padding: 2rem 2.5rem; }
+.boqTitle { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--navy); margin-bottom: 1.25rem; }
+
+.boqTable { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+
+.boqHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  background: var(--sand);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.boqRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid var(--border);
+  align-items: center;
+}
+.boqRow:hover { background: var(--sand); }
+
+.boqName { font-size: 0.85rem; font-weight: 500; color: var(--navy); }
+.boqQty { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-mid); }
+.boqUnit { font-size: 0.75rem; color: var(--text-dim); }
+.boqCost { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--copper); }
+
+.disclaimer {
+  margin: 0;
+  padding: 1.25rem 2.5rem;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  background: var(--sand);
+  border-top: 1px solid var(--border);
+  line-height: 1.6;
+}
+
+/* Slab results */
+.slabResults { padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+.slabVolCard {
+  text-align: center;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, var(--navy), #2A3D6A);
+  border-radius: var(--radius-lg);
+}
+
+.slabVolLabel { display: block; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.5rem; }
+.slabVolVal { display: block; font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--copper); margin-bottom: 0.3rem; }
+.slabVolNote { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+
+.slabMatGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+.slabMat {
+  background: var(--sand);
+  border: 1px solid var(--border);
+  border-top: 3px solid;
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.slabMatLabel { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.5rem; font-weight: 600; }
+.slabMatQty { display: block; font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; margin-bottom: 2px; }
+.slabMatUnit { display: block; font-size: 0.7rem; color: var(--text-dim); }
+
+.slabCostCard {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--stone);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.slabCostLabel { display: block; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.4rem; }
+.slabCostVal { display: block; font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--copper); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .inputGrid4 { grid-template-columns: 1fr 1fr; }
+  .totalInner { grid-template-columns: 1fr; gap: 1.5rem; }
+  .slabMatGrid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .inputGrid2 { grid-template-columns: 1fr; }
+  .inputGrid3 { grid-template-columns: 1fr 1fr; }
+  .formSection { padding: 1.5rem; }
+  .calcCardHead { padding: 1.5rem; }
+  .calcActions { padding: 1.5rem; flex-wrap: wrap; }
+  .boqSection { padding: 1.5rem; }
+  .boqHeader, .boqRow { grid-template-columns: 1fr 1fr 0.5fr 1fr; gap: 0.5rem; }
+  .slabResults { padding: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .inputGrid3 { grid-template-columns: 1fr; }
+  .inputGrid4 { grid-template-columns: 1fr; }
+  .slabMatGrid { grid-template-columns: 1fr 1fr; }
+  .boqHeader, .boqRow { grid-template-columns: 1fr 1fr; }
+  .boqHeader > *:nth-child(3),
+  .boqRow > *:nth-child(3) { display: none; }
+}

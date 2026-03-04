@@ -1,0 +1,250 @@
+/* ═══════════ BIO ═══════════ */
+.bioSection { background: var(--cream); }
+
+.profileVisual { position: relative; margin-bottom: 2rem; }
+
+.profileBg {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 340px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--sand), var(--stone));
+  border: 1px solid var(--border);
+}
+
+.profileImg {
+  position: absolute;
+  inset: 20px;
+  border-radius: calc(var(--radius-xl) - 8px);
+  background: linear-gradient(135deg, var(--navy), var(--slate));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileInitials {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+.profileBadge {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--navy);
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.profileDot {
+  width: 8px; height: 8px;
+  background: #5DBB6E;
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.bioStats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+
+.bioStatItem {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.bioStatVal {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.bioStatLabel {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.bioParagraphs { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem; }
+
+.bioPara {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  background: var(--sand);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--copper);
+}
+
+.bioParaIcon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+
+.bioParaHeading {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+}
+
+.bioPara p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.75; margin: 0; }
+
+.bioTags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* ═══════════ SKILLS + EDU ═══════════ */
+.skillsEduSection { background: var(--sand); }
+
+.skillsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.skillCard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.skillCard:hover { box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+
+.skillCardIcon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+.skillCardName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.skillCardItems { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+.skillCardItems li {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  padding-left: 0.8rem;
+  position: relative;
+}
+.skillCardItems li::before { content: '·'; position: absolute; left: 0; color: var(--copper); font-weight: 700; }
+
+.eduTimeline { display: flex; flex-direction: column; gap: 1rem; }
+
+.eduItem {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--copper);
+  transition: var(--transition);
+}
+.eduItem:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+
+.eduIcon { font-size: 1.8rem; flex-shrink: 0; margin-top: 2px; }
+.eduContent { flex: 1; }
+.eduYear { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--copper); margin-bottom: 3px; }
+.eduDegree { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.eduSchool { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.6rem; font-style: italic; }
+
+.eduDetails { list-style: none; display: flex; flex-direction: column; gap: 0.2rem; }
+.eduDetails li { font-size: 0.75rem; color: var(--text-dim); padding-left: 0.75rem; position: relative; }
+.eduDetails li::before { content: '→'; position: absolute; left: 0; color: var(--copper); font-size: 0.6rem; top: 2px; }
+
+/* ═══════════ CONTACT ═══════════ */
+.contactSection { background: var(--cream); }
+.contactHeader { margin-bottom: 3.5rem; }
+
+.contactMethods { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+
+.contactMethod {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+.contactMethod:hover { border-color: var(--copper); box-shadow: var(--shadow-md); }
+
+.contactMethodIcon { font-size: 2rem; flex-shrink: 0; }
+.contactMethodTitle { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+.contactMethodDesc { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+.contactMethodLink { font-size: 0.85rem; font-weight: 600; color: var(--copper); text-decoration: none; border-bottom: 1px dashed var(--copper); }
+.contactMethodLink:hover { color: var(--copper-dark); }
+.contactMethodText { font-size: 0.82rem; color: var(--text-mid); line-height: 1.5; }
+
+.social {}
+.socialLabel { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.75rem; }
+.socialLinks { display: flex; gap: 0.75rem; }
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  color: var(--text-mid);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.socialLink:hover { border-color: var(--navy); color: var(--navy); background: var(--sand); transform: translateY(-2px); }
+
+.contactForm {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.formTitle { font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
+.formSubtitle { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1.75rem; }
+.formGroup { margin-bottom: 0; }
+.formRow { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .skillsGrid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .bioStats { grid-template-columns: repeat(2, 1fr); }
+  .formRow { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .bioStats { grid-template-columns: 1fr 1fr; }
+}
