@@ -1,11 +1,115 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { projects } from '@/data/projects';
 import styles from './page.module.css';
 
 const FILTERS = ['all', 'RESIDENTIAL', 'COMMERCIAL'];
+
+function ImageLightbox({ projects, initialIndex, onClose }) {
+  const [index, setIndex] = useState(initialIndex);
+  const [direction, setDirection] = useState(0);
+  const current = projects[index];
+
+  const go = useCallback((dir) => {
+    setDirection(dir);
+    setIndex(i => (i + dir + projects.length) % projects.length);
+  }, [projects.length]);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowRight') go(1);
+      if (e.key === 'ArrowLeft') go(-1);
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [onClose, go]);
+
+  return (
+    <motion.div
+      className={styles.lightboxBackdrop}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <button className={styles.lightboxClose} onClick={onClose} aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div className={styles.lightboxCounter}>{index + 1} / {projects.length}</div>
+
+      <button className={`${styles.lightboxArrow} ${styles.lightboxArrowLeft}`} onClick={() => go(-1)} aria-label="Previous">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      <div className={styles.lightboxStage}>
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={current.id}
+            className={styles.lightboxImageWrap}
+            custom={direction}
+            initial={{ opacity: 0, x: direction * 80 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction * -80 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Image
+              src={current.image}
+              alt={current.title}
+              fill
+              style={{ objectFit: 'contain' }}
+              sizes="100vw"
+              priority
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        <motion.div
+          key={`cap-${current.id}`}
+          className={styles.lightboxCaption}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+        >
+          <span className={styles.lightboxCaptionCat} style={{ color: current.accentColor }}>
+            {current.category}
+          </span>
+          <span className={styles.lightboxCaptionTitle}>{current.title}</span>
+          {current.plotArea && (
+            <span className={styles.lightboxCaptionMeta}>{current.plotArea}</span>
+          )}
+        </motion.div>
+      </div>
+
+      <button className={`${styles.lightboxArrow} ${styles.lightboxArrowRight}`} onClick={() => go(1)} aria-label="Next">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+
+      <div className={styles.lightboxStrip}>
+        {projects.map((p, i) => (
+          <button
+            key={p.id}
+            className={`${styles.lightboxThumb} ${i === index ? styles.lightboxThumbActive : ''}`}
+            onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i); }}
+          >
+            <Image src={p.image} alt={p.title} fill style={{ objectFit: 'cover' }} sizes="80px" />
+            <div className={styles.lightboxThumbOverlay} style={{ background: i === index ? `${p.accentColor}55` : undefined }} />
+          </button>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
 
 function StatsBanner({ all }) {
   const res = all.filter(p => p.category === 'RESIDENTIAL').length;
@@ -55,6 +159,19 @@ function ProjectModal({ project, onClose }) {
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       >
         <div style={{ height: 4, background: project.accentColor, borderRadius: '20px 20px 0 0' }} />
+
+        {/* Project image in modal */}
+        <div className={styles.modalImage}>
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            style={{ objectFit: 'cover' }}
+            onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }}
+          />
+          <div className={styles.modalImageOverlay} style={{ background: `linear-gradient(to top, ${project.accentColor}99, transparent)` }} />
+        </div>
+
         <div className={styles.modalHead}>
           <div>
             <span className={styles.modalCat} style={{ color: project.accentColor }}>{project.category}</span>
@@ -78,7 +195,10 @@ function ProjectModal({ project, onClose }) {
         <div className={styles.modalBody}>
           {tab === 'specs' && (
             <div>
-              <p className={styles.modalDesc}>{project.description}</p>
+              <div
+                className={styles.modalDesc}
+                dangerouslySetInnerHTML={{ __html: project.description }}
+              />
               <div className={styles.specsGrid}>
                 {[
                   ['Plot Area', project.plotArea],
@@ -133,7 +253,7 @@ function ProjectModal({ project, onClose }) {
   );
 }
 
-function TimelineCard({ project, index, onClick }) {
+function TimelineCard({ project, index, onClick, onImageClick }) {
   const ref = useRef();
   const inView = useInView(ref, { once: true, margin: '-50px' });
   const isEven = index % 2 === 0;
@@ -153,12 +273,45 @@ function TimelineCard({ project, index, onClick }) {
         onClick={() => onClick(project)}
       >
         <div style={{ height: 3, background: project.accentColor }} />
+
+        {/* Project thumbnail image — click opens lightbox */}
+        <div
+          className={styles.tcImage}
+          onClick={(e) => { e.stopPropagation(); onImageClick(); }}
+          role="button"
+          aria-label={`View image for ${project.title}`}
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            onError={(e) => {
+              e.currentTarget.parentElement.classList.add(styles.tcImageFallback);
+              e.currentTarget.parentElement.style.background = `linear-gradient(135deg, ${project.accentColor}22, ${project.accentColor}44)`;
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+          <div className={styles.tcImageOverlay} />
+          {/* Gallery icon hint on hover */}
+          <div className={styles.tcImageGalleryHint}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          <span className={styles.tcImageCat} style={{ background: project.accentColor }}>{project.category}</span>
+        </div>
         <div className={styles.tcHeader}>
           <span className={styles.tcCat} style={{ color: project.accentColor }}>{project.category}</span>
           <span className={styles.tcId}>#{String(project.id).padStart(2, '0')}</span>
         </div>
         <h3 className={styles.tcTitle}>{project.title}</h3>
-        <p className={styles.tcDesc}>{project.description}</p>
+        <div
+          className={styles.tcDesc}
+          dangerouslySetInnerHTML={{ __html: project.description }}
+        />
         <div className={styles.tcGrid}>
           {[['Plot Area', project.plotArea], ['Est. Cost', project.estimatedCost], ['Structure', project.structure], ['Foundation', project.foundation]].map(([l, v]) => (
             <div key={l}>
@@ -184,6 +337,7 @@ function TimelineCard({ project, index, onClick }) {
 export default function ProjectsPage() {
   const [filter, setFilter] = useState('all');
   const [selected, setSelected] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   const sorted = [...projects].sort((a, b) => b.id - a.id);
   const filtered = filter === 'all' ? sorted : sorted.filter(p => p.category === filter);
@@ -251,7 +405,13 @@ export default function ProjectsPage() {
           <div className={styles.timeline}>
             <div className={styles.timelineSpine} />
             {filtered.map((p, i) => (
-              <TimelineCard key={p.id} project={p} index={i} onClick={setSelected} />
+              <TimelineCard
+                key={p.id}
+                project={p}
+                index={i}
+                onClick={setSelected}
+                onImageClick={() => setLightboxIndex(sorted.findIndex(s => s.id === p.id))}
+              />
             ))}
           </div>
         </div>
@@ -259,6 +419,13 @@ export default function ProjectsPage() {
 
       <AnimatePresence>
         {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+        {lightboxIndex !== null && (
+          <ImageLightbox
+            projects={sorted}
+            initialIndex={lightboxIndex}
+            onClose={() => setLightboxIndex(null)}
+          />
+        )}
       </AnimatePresence>
     </div>
   );

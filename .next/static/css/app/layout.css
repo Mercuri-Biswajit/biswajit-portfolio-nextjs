@@ -662,12 +662,28 @@ a.Footer_contactRow__EX7QU:hover {
 
 .Navbar_logo__Am5h2 {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   text-decoration: none;
   flex-shrink: 0;
   transition: transform 0.2s ease;
+  position: relative;
 }
 .Navbar_logo__Am5h2:hover { transform: scale(1.02); }
+
+/* Logo image – shown when file exists */
+.Navbar_logoImg__Skw9J {
+  display: block;
+  width: auto;
+  height: 36px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Text fallback – shown ONLY if image fails to load */
+.Navbar_logoTextFallback__3LT7b {
+  display: none;          /* hidden by default; JS onError shows it */
+  flex-direction: column;
+}
 
 .Navbar_logoName__IAlU6 {
   font-family: var(--font-display);
@@ -744,6 +760,27 @@ a.Footer_contactRow__EX7QU:hover {
           backdrop-filter: blur(16px);
   z-index: 999;
   padding: 2rem var(--container-px);
+  overflow-y: auto;
+}
+
+.Navbar_mobileLogo__pU5W0 {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.Navbar_mobileLogoImg__2Y9uM {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.Navbar_mobileLogoFallback__HlxhX {
+  display: none;
+  flex-direction: column;
 }
 
 .Navbar_mobileLinks__BcnxG {

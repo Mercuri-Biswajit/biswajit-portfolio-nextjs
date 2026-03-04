@@ -24,12 +24,28 @@
 
 .logo {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   text-decoration: none;
   flex-shrink: 0;
   transition: transform 0.2s ease;
+  position: relative;
 }
 .logo:hover { transform: scale(1.02); }
+
+/* Logo image – shown when file exists */
+.logoImg {
+  display: block;
+  width: auto;
+  height: 36px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Text fallback – shown ONLY if image fails to load */
+.logoTextFallback {
+  display: none;          /* hidden by default; JS onError shows it */
+  flex-direction: column;
+}
 
 .logoName {
   font-family: var(--font-display);
@@ -105,6 +121,27 @@
   backdrop-filter: blur(16px);
   z-index: 999;
   padding: 2rem var(--container-px);
+  overflow-y: auto;
+}
+
+.mobileLogo {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.mobileLogoImg {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.mobileLogoFallback {
+  display: none;
+  flex-direction: column;
 }
 
 .mobileLinks {

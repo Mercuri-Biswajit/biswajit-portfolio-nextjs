@@ -31,7 +31,11 @@ function BioSection() {
             <div className={styles.profileVisual}>
               <div className={styles.profileBg} />
               <div className={styles.profileImg}>
-                <span className={styles.profileInitials}>BD</span>
+                <img
+                  src="/assets/icons/logo.webp"
+                  alt="Er. Biswajit Deb Barman"
+                  className={styles.profileLogo}
+                />
               </div>
               <div className={styles.profileBadge}>
                 <span className={styles.profileDot} />

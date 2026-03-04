@@ -23,12 +23,6 @@
       "static/chunks/main-app.js",
       "static/css/app/about/page.css",
       "static/chunks/app/about/page.js"
-    ],
-    "/calculator/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/calculator/page.css",
-      "static/chunks/app/calculator/page.js"
     ]
   }
 }

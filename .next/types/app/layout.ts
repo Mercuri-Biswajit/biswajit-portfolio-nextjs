@@ -1,4 +1,4 @@
-// File: E:\My_Portfolio\structural-portfolio\src\app\layout.jsx
+// File: E:\My_Portfolio\biswajit-portfolio-nextjs\src\app\layout.jsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

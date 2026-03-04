@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { siteConfig, skills, services } from '@/data/index';
 import { projects } from '@/data/projects';
@@ -200,7 +201,22 @@ function FeaturedProjects() {
           {featured.map((p, i) => (
             <FadeIn key={p.id} delay={i * 0.1}>
               <Link href="/projects" className={`card ${styles.projectCard}`}>
-                <div className={styles.projectAccent} style={{ background: p.accentColor }} />
+                {/* Project thumbnail */}
+                <div className={styles.projectThumb}>
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    onError={(e) => {
+                      e.currentTarget.parentElement.style.background = `linear-gradient(135deg, ${p.accentColor}22, ${p.accentColor}55)`;
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                  <div className={styles.projectThumbOverlay} />
+                  <span className={styles.projectThumbCat} style={{ background: p.accentColor }}>{p.category}</span>
+                </div>
                 <div className={styles.projectBody}>
                   <span className={styles.projectCat} style={{ color: p.accentColor }}>{p.category}</span>
                   <h3 className={styles.projectTitle}>{p.title}</h3>
